@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <p>
+      Hello {{ current_user.username}}. Make A Post Now And Allow People To See It!
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p>
+          {{ form.body.label }} <br>
+          {{ form.body(cols=120, rows=4)}}<br>
+          {% for error in form.body.errors %}
+          <span style="color: red;">
+              {{ error }}
+          </span>
+          {% endfor %}
+        </p>
+     <p>
+          {{ form.submit() }}
+      </p>
+  </form>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    {% for post in posts %}
+      {% if post %}
+       <table>
+          <tr valgin="top">
+             <td><img src="{{post.author.avatar(36)}}" alt=""></td>
+            <td>{{post.author.username}} says: {{ post.body }}</td>
+           </tr>
+         </table>
+
+      {% endif %}
+    {% endfor %}
+   </div>
+ </div>
+   
+{% endblock %} 
